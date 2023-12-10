@@ -1,0 +1,5 @@
+packages: .
+tests:    True
+
+package codet
+  ghc-options: -Wall -Wno-trustworthy-safe
