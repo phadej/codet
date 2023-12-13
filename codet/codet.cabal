@@ -5,6 +5,7 @@ license:         BSD-3-Clause
 license-file:    LICENSE
 author:          Oleg Grenrus <oleg.grenrus@iki.fi>
 maintainer:      Oleg Grenrus <oleg.grenrus@iki.fi>
+copyright:       2023 Oleg Grenrus, Well-Typed LLP
 category:        Data
 build-type:      Simple
 extra-doc-files: CHANGELOG.md
