@@ -5,7 +5,7 @@
 {-# LANGUAGE TemplateHaskellQuotes #-}
 {-# LANGUAGE TypeApplications      #-}
 {-# LANGUAGE Unsafe                #-}
-{-# HADDOCK not-home #-}
+{-# OPTIONS_HADDOCK not-home #-}
 module Language.Haskell.TH.CodeT.Unsafe where
 
 import Data.Int     (Int16, Int32, Int64, Int8)
@@ -15,6 +15,28 @@ import GHC.TypeLits
 
 import Language.Haskell.TH        (Name, Q, Quote, TyLit (..), Type, appT, litT, varT)
 import Language.Haskell.TH.Syntax (mkNameG_d, mkNameG_tc)
+
+-- instances
+import qualified Data.ByteString
+import qualified Data.ByteString.Builder
+import qualified Data.ByteString.Lazy
+import qualified Data.Functor.Compose
+import qualified Data.Functor.Const
+import qualified Data.Functor.Identity
+import qualified Data.IntMap
+import qualified Data.IntSet
+import qualified Data.Map
+import qualified Data.Sequence
+import qualified Data.Set
+import qualified Data.Text
+import qualified Data.Text.Lazy
+import qualified Data.Text.Lazy.Builder
+import qualified Data.Time
+import qualified Data.Tree
+
+-------------------------------------------------------------------------------
+-- CodeT
+-------------------------------------------------------------------------------
 
 newtype CodeT m a = UnsafeCodeT (m Type)
 
@@ -106,21 +128,40 @@ instance LiftT Either where codeT = unsafeCodeTName ''Either
 -- instances: bytestring
 -------------------------------------------------------------------------------
 
+instance LiftT Data.ByteString.ByteString where codeT = unsafeCodeTName ''Data.ByteString.ByteString
+instance LiftT Data.ByteString.Lazy.ByteString where codeT = unsafeCodeTName ''Data.ByteString.Lazy.ByteString
+instance LiftT Data.ByteString.Builder.Builder where codeT = unsafeCodeTName ''Data.ByteString.Builder.Builder
+
 -------------------------------------------------------------------------------
 -- instances: containers
 -------------------------------------------------------------------------------
+
+instance LiftT Data.IntMap.IntMap where codeT = unsafeCodeTName ''Data.IntMap.IntMap
+instance LiftT Data.IntSet.IntSet where codeT = unsafeCodeTName ''Data.IntSet.IntSet
+instance LiftT Data.Map.Map where codeT = unsafeCodeTName ''Data.Map.Map
+instance LiftT Data.Sequence.Seq where codeT = unsafeCodeTName ''Data.Sequence.Seq
+instance LiftT Data.Set.Set where codeT = unsafeCodeTName ''Data.IntSet.IntSet
+instance LiftT Data.Tree.Tree where codeT = unsafeCodeTName ''Data.Tree.Tree
 
 -------------------------------------------------------------------------------
 -- instances: text
 -------------------------------------------------------------------------------
 
+instance LiftT Data.Text.Text where codeT = unsafeCodeTName ''Data.Text.Text
+instance LiftT Data.Text.Lazy.Text where codeT = unsafeCodeTName ''Data.Text.Lazy.Text
+instance LiftT Data.Text.Lazy.Builder.Builder where codeT = unsafeCodeTName ''Data.Text.Lazy.Builder.Builder
+
 -------------------------------------------------------------------------------
 -- instances: transformers
 -------------------------------------------------------------------------------
 
--- TODO: Proxy
--- TODO: Identity Compose Const
+instance LiftT Data.Functor.Identity.Identity where codeT = unsafeCodeTName ''Data.Functor.Identity.Identity
+instance LiftT Data.Functor.Compose.Compose where codeT = unsafeCodeTName ''Data.Functor.Compose.Compose
+instance LiftT Data.Functor.Const.Const where codeT = unsafeCodeTName ''Data.Functor.Const.Const
 
 -------------------------------------------------------------------------------
 -- instances: time
 -------------------------------------------------------------------------------
+
+instance LiftT Data.Time.UTCTime where codeT = unsafeCodeTName ''Data.Time.UTCTime
+instance LiftT Data.Time.Day where codeT = unsafeCodeTName ''Data.Time.Day
