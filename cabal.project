@@ -1,5 +1,9 @@
-packages: .
+packages: codet
+packages: codet-plugin
 tests:    True
 
 package codet
+  ghc-options: -Wall -Wno-trustworthy-safe
+
+package codet-plugin
   ghc-options: -Wall -Wno-trustworthy-safe

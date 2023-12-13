@@ -3,10 +3,11 @@
 module Language.Haskell.TH.CodeT (
     -- * CodeT
     CodeT,
+    unTypeCodeT,
     appCodeT,
     CodeTQ,
     -- * LiftT
-    LiftT,
+    LiftT (..),
 ) where
 
 import Language.Haskell.TH.CodeT.Unsafe
