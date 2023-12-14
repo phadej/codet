@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP                   #-}
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE PolyKinds             #-}
 {-# LANGUAGE RankNTypes            #-}
@@ -5,6 +6,9 @@
 {-# LANGUAGE TemplateHaskellQuotes #-}
 {-# LANGUAGE TypeApplications      #-}
 {-# LANGUAGE Unsafe                #-}
+#if __GLASGOW_HASKELL__ <908
+{-# LANGUAGE UndecidableInstances  #-}
+#endif
 {-# OPTIONS_HADDOCK not-home #-}
 module Language.Haskell.TH.CodeT.Unsafe where
 
@@ -72,8 +76,11 @@ instance (LiftT f, LiftT x) => LiftT (f x) where
 -------------------------------------------------------------------------------
 
 instance KnownSymbol s => LiftT s where codeT = UnsafeCodeT $ litT $ return $ StrTyLit  $ symbolVal (Proxy @s)
-instance KnownChar c   => LiftT c where codeT = UnsafeCodeT $ litT $ return $ CharTyLit $ charVal (Proxy @c)
 instance KnownNat n    => LiftT n where codeT = UnsafeCodeT $ litT $ return $ NumTyLit  $ natVal (Proxy @n)
+
+#if MIN_VERSION_base(4,16,0)
+instance KnownChar c   => LiftT c where codeT = UnsafeCodeT $ litT $ return $ CharTyLit $ charVal (Proxy @c)
+#endif
 
 -------------------------------------------------------------------------------
 -- instances: Type

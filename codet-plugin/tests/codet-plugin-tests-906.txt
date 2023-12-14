@@ -14,9 +14,9 @@ GHC.Show.Show
 (VarT (Name (OccName "Show") (NameG (TcClsName) (PkgName "base") (ModName "GHC.Show"))))
 1
 (LitT (NumTyLit (1)))
-'c'
-(LitT (CharTyLit ('c')))
 "string"
 (LitT (StrTyLit "string"))
+'c'
+(LitT (CharTyLit ('c')))
 GHC.Types.Int
 (VarT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types"))))

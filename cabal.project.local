@@ -1,1 +1,9 @@
 with-compiler: ghc-9.8.1
+
+constraints: bytestring installed
+constraints: containeres installed
+constraints: text installed
+constraints: time installed
+constraints: directory installed
+constraints: filepath installed
+constraints: transformers installed
