@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP             #-}
 {-# LANGUAGE RecordWildCards #-}
 module Language.Haskell.TH.CodeT.Plugin (
     plugin,
@@ -42,7 +43,9 @@ tcPlugin _ = TcPlugin
     { tcPluginInit    = tcPluginInit_
     , tcPluginSolve   = tcPluginSolve_
     , tcPluginStop    = const (return ())
+#if __GLASGOW_HASKELL__ >=904
     , tcPluginRewrite = \_ -> Plugins.emptyUFM
+#endif
     }
 
 data PluginCtx = PluginCtx
@@ -86,11 +89,12 @@ tcPluginSolve_ ctx _evBindsVar _given wanteds = do
 
 solveLiftT :: PluginCtx -> Ct -> TcM (Maybe (EvTerm, Ct))
 solveLiftT ctx wanted
-    | Just (ct, [k, x]) <- findClassConstraint ctx.liftTClass wanted
+    | Just (ct, [k, x]) <- findClassConstraint (liftTClass ctx) wanted
     , Just (xTyCon, _args) <- splitTyConApp_maybe x
     , isAlgTyCon xTyCon || isPromotedDataCon xTyCon
-    , let ki = tyConKind xTyCon
-    , (_invPis, _) <- splitInvisPiTys ki
+    -- , let ki = tyConKind xTyCon
+    -- in 9.0 splitPiTysInvisible
+    -- , (_invPis, _) <- splitInvisPiTys ki
     , let xTyConName = getName xTyCon
     , Just tcMod <- nameModule_maybe xTyConName
     -- TODO: check that 'args' count matches 'invPis'?
@@ -107,8 +111,8 @@ solveLiftT ctx wanted
         mod_str' <- mkStringExpr mod_str
         occ_str' <- mkStringExpr occ_str
 
-        let fun | isDataOcc occ = ctx.unsafeCodeTNameD
-                | isTcOcc occ   = ctx.unsafeCodeTNameTC
+        let fun | isDataOcc occ = unsafeCodeTNameD ctx
+                | isTcOcc occ   = unsafeCodeTNameTC ctx
                 | otherwise     = Plugins.pprPanic "solveLiftT" (ppr xTyConName)
 
         let ev = mkCoreApps (Var fun) [Type k, Type x, pkg_str', mod_str', occ_str']

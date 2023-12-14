@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP                        #-}
 {-# LANGUAGE DataKinds                  #-}
 {-# LANGUAGE DeriveFunctor              #-}
 {-# LANGUAGE DerivingStrategies         #-}
@@ -38,11 +39,18 @@ findPackageDir = do
     directory = "codet-plugin"
     cabalFile = "codet-plugin.cabal"
 
+ghcVer :: Int -> Int
+ghcVer v
+    | v >= 906  = 906 -- 9.6+ prints GHC.Types.List, not []
+    | v >= 902  = 902 -- 9.2+ has Char kind
+    | otherwise = 900
+
 main :: IO ()
 main = do
     findPackageDir
+    let output = "tests/codet-plugin-tests-" ++ show (ghcVer __GLASGOW_HASKELL__) ++ ".txt"
     defaultMain $ testGroup "codet"
-        [ goldenVsStringDiff "basic" diff "tests/codet-plugin-tests.txt" $ do
+        [ goldenVsStringDiff "basic" diff output $ do
             return $ fromString $ unlines $ concat
                 [ dispType (codeT @Int)
                 , dispType (codeT @Proxy)
@@ -52,8 +60,10 @@ main = do
                 , dispType (codeT @[Int])
                 , dispType (codeT @Show)
                 , dispType (codeT @1)
-                , dispType (codeT @'c')
                 , dispType (codeT @"string")
+#if MIN_VERSION_base(4,16,0)
+                , dispType (codeT @'c')
+#endif
                 , dispType (codeT @MyInt) -- Int
                 -- , dispType (codeT @Stuck) -- fails
                 ]

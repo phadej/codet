@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP                        #-}
 {-# LANGUAGE DataKinds                  #-}
 {-# LANGUAGE DeriveFunctor              #-}
 {-# LANGUAGE DerivingStrategies         #-}
@@ -7,11 +8,10 @@
 {-# LANGUAGE TypeApplications           #-}
 module Main (main) where
 
-import Control.Monad.Trans.State (State, evalState, get, put)
-import Data.Generics             (gshow)
-import Language.Haskell.TH
-
+import Control.Monad.Trans.State  (State, evalState, get, put)
+import Data.Generics              (gshow)
 import Data.String                (fromString)
+import Language.Haskell.TH
 import Language.Haskell.TH.Syntax
 import System.Directory           (doesFileExist, setCurrentDirectory)
 import System.FilePath            ((</>))
@@ -32,17 +32,26 @@ findPackageDir = do
     directory = "codet"
     cabalFile = "codet.cabal"
 
+ghcVer :: Int -> Int
+ghcVer v
+    | v >= 906  = 906 -- 9.6+ prints GHC.Types.List, not []
+    | v >= 902  = 902 -- 9.2+ has Char kind
+    | otherwise = 900
+
 main :: IO ()
 main = do
     findPackageDir
+    let output = "tests/codet-tests-" ++ show (ghcVer __GLASGOW_HASKELL__) ++ ".txt"
     defaultMain $ testGroup "codet"
-        [ goldenVsStringDiff "basic" diff "tests/codet-tests.txt" $ do
+        [ goldenVsStringDiff "basic" diff output $ do
             return $ fromString $ unlines $ concat
                 [ dispType (codeT @Int)
                 , dispType (codeT @[Int])
                 , dispType (codeT @1)
-                , dispType (codeT @'c')
                 , dispType (codeT @"string")
+#if MIN_VERSION_base(4,16,0)
+                , dispType (codeT @'c')
+#endif
                 , dispType (codeT @MyInt) -- Int
                 ]
         ]
