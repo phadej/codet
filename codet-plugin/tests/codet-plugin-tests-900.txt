@@ -1,20 +1,20 @@
 GHC.Types.Int
-(VarT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types"))))
+(ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types"))))
 Data.Proxy.Proxy
-(VarT (Name (OccName "Proxy") (NameG (TcClsName) (PkgName "base") (ModName "Data.Proxy"))))
+(ConT (Name (OccName "Proxy") (NameG (TcClsName) (PkgName "base") (ModName "Data.Proxy"))))
 GHC.Maybe.Just
-(VarT (Name (OccName "Just") (NameG (DataName) (PkgName "base") (ModName "GHC.Maybe"))))
+(ConT (Name (OccName "Just") (NameG (DataName) (PkgName "base") (ModName "GHC.Maybe"))))
 Main.Foo
-(VarT (Name (OccName "Foo") (NameG (TcClsName) (PkgName "main") (ModName "Main"))))
+(ConT (Name (OccName "Foo") (NameG (TcClsName) (PkgName "main") (ModName "Main"))))
 Main.Foo
-(VarT (Name (OccName "Foo") (NameG (DataName) (PkgName "main") (ModName "Main"))))
+(ConT (Name (OccName "Foo") (NameG (DataName) (PkgName "main") (ModName "Main"))))
 GHC.Types.[] GHC.Types.Int
-(AppT (VarT (Name (OccName "[]") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types")))) (VarT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types")))))
+(AppT (ConT (Name (OccName "[]") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types")))) (ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types")))))
 GHC.Show.Show
-(VarT (Name (OccName "Show") (NameG (TcClsName) (PkgName "base") (ModName "GHC.Show"))))
+(ConT (Name (OccName "Show") (NameG (TcClsName) (PkgName "base") (ModName "GHC.Show"))))
 1
 (LitT (NumTyLit (1)))
 "string"
 (LitT (StrTyLit "string"))
 GHC.Types.Int
-(VarT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types"))))
+(ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types"))))

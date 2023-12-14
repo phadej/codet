@@ -1,10 +1,10 @@
 GHC.Types.Int
-(VarT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types"))))
+(ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types"))))
 GHC.Types.[] GHC.Types.Int
-(AppT (VarT (Name (OccName "[]") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types")))) (VarT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types")))))
+(AppT (ConT (Name (OccName "[]") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types")))) (ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types")))))
 1
 (LitT (NumTyLit (1)))
 "string"
 (LitT (StrTyLit "string"))
 GHC.Types.Int
-(VarT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types"))))
+(ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types"))))

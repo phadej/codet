@@ -17,7 +17,7 @@ import Data.Proxy   (Proxy (..))
 import Data.Word    (Word16, Word32, Word64, Word8)
 import GHC.TypeLits
 
-import Language.Haskell.TH        (Name, Q, Quote, TyLit (..), Type, appT, litT, varT)
+import Language.Haskell.TH        (Name, Q, Quote, TyLit (..), Type, appT, conT, litT)
 import Language.Haskell.TH.Syntax (mkNameG_d, mkNameG_tc)
 
 -- instances
@@ -53,7 +53,7 @@ appCodeT (UnsafeCodeT f) (UnsafeCodeT x) = UnsafeCodeT (appT f x)
 type CodeTQ = CodeT Q
 
 unsafeCodeTName :: Quote m => Name -> CodeT m a
-unsafeCodeTName n = UnsafeCodeT (varT n)
+unsafeCodeTName n = UnsafeCodeT (conT n)
 
 unsafeCodeTNameD :: String -> String -> String -> forall m. Quote m => CodeT m a
 unsafeCodeTNameD x y z = unsafeCodeTName (mkNameG_d x y z)
