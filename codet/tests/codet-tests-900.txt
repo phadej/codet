@@ -8,3 +8,7 @@ GHC.Types.[] GHC.Types.Int
 (LitT (StrTyLit "string"))
 GHC.Types.Int
 (ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types"))))
+(GHC.Types.->)
+(ConT (Name (OccName "->") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types"))))
+GHC.Prim.TYPE GHC.Types.LiftedRep
+(AppT (ConT (Name (OccName "TYPE") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Prim")))) (ConT (Name (OccName "LiftedRep") (NameG (DataName) (PkgName "ghc-prim") (ModName "GHC.Types")))))

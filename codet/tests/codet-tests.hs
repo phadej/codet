@@ -20,6 +20,8 @@ import Test.Tasty.Golden          (goldenVsStringDiff)
 
 import Language.Haskell.TH.CodeT
 
+import qualified Data.Kind
+
 type MyInt = Int
 
 findPackageDir :: IO ()
@@ -53,6 +55,8 @@ main = do
                 , dispType (codeT @'c')
 #endif
                 , dispType (codeT @MyInt) -- Int
+                , dispType (codeT @(->))
+                , dispType (codeT @Data.Kind.Type)
                 ]
         ]
 
