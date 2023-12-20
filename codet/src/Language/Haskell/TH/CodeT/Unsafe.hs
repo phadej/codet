@@ -1,4 +1,5 @@
 {-# LANGUAGE CPP                   #-}
+{-# LANGUAGE DataKinds             #-}
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE PolyKinds             #-}
 {-# LANGUAGE RankNTypes            #-}
@@ -15,7 +16,13 @@ module Language.Haskell.TH.CodeT.Unsafe where
 import Data.Int     (Int16, Int32, Int64, Int8)
 import Data.Proxy   (Proxy (..))
 import Data.Word    (Word16, Word32, Word64, Word8)
-import GHC.TypeLits
+import GHC.TypeLits (KnownNat, KnownSymbol, natVal, symbolVal)
+
+#if MIN_VERSION_base(4,16,0)
+import GHC.TypeLits (KnownChar, charVal)
+#endif
+
+import qualified GHC.Exts as Ki
 
 import Language.Haskell.TH        (Name, Q, Quote, TyLit (..), Type, appT, conT, litT)
 import Language.Haskell.TH.Syntax (mkNameG_d, mkNameG_tc)
@@ -130,6 +137,37 @@ instance LiftT IO where codeT = unsafeCodeTName ''IO
 -------------------------------------------------------------------------------
 
 instance LiftT Either where codeT = unsafeCodeTName ''Either
+
+-------------------------------------------------------------------------------
+-- instances: kinds
+-------------------------------------------------------------------------------
+
+instance LiftT (->) where codeT = unsafeCodeTName ''(->) -- perfectly, we want LiftT.FUN
+instance LiftT Ki.TYPE where codeT = unsafeCodeTName ''Ki.TYPE
+
+{-
+
+We don't have an instance for Constraint. GHC is tricky.
+https://gitlab.haskell.org/ghc/ghc/-/issues/24279
+
+#if MIN_VERSION_base(4,18,0)
+instance LiftT Ki.CONSTRAINT where codeT = unsafeCodeTName ''Ki.CONSTRAINT
+#else
+instance LiftT Ki.Constraint where codeT = unsafeCodeTName ''Ki.Constraint
+#endif
+-}
+
+#if MIN_VERSION_base(4,16,0)
+instance LiftT Ki.RuntimeRep where codeT = unsafeCodeTName ''Ki.RuntimeRep
+instance LiftT Ki.BoxedRep where codeT = unsafeCodeTName 'Ki.BoxedRep
+
+instance LiftT Ki.Levity where codeT = unsafeCodeTName ''Ki.Levity
+instance LiftT Ki.Lifted where codeT = unsafeCodeTName 'Ki.Lifted
+instance LiftT Ki.Unlifted where codeT = unsafeCodeTName 'Ki.Unlifted
+#else
+instance LiftT Ki.LiftedRep where codeT = unsafeCodeTName 'Ki.LiftedRep
+instance LiftT Ki.UnliftedRep where codeT = unsafeCodeTName 'Ki.UnliftedRep
+#endif
 
 -------------------------------------------------------------------------------
 -- instances: bytestring

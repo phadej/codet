@@ -10,3 +10,7 @@ GHC.Types.List GHC.Types.Int
 (LitT (CharTyLit ('c')))
 GHC.Types.Int
 (ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types"))))
+(GHC.Types.->)
+(ConT (Name (OccName "->") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types"))))
+GHC.Prim.TYPE (GHC.Types.BoxedRep GHC.Types.Lifted)
+(AppT (ConT (Name (OccName "TYPE") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Prim")))) (AppT (ConT (Name (OccName "BoxedRep") (NameG (DataName) (PkgName "ghc-prim") (ModName "GHC.Types")))) (ConT (Name (OccName "Lifted") (NameG (DataName) (PkgName "ghc-prim") (ModName "GHC.Types"))))))
