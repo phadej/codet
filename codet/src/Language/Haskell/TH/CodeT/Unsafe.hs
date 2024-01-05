@@ -3,6 +3,7 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE PolyKinds             #-}
 {-# LANGUAGE RankNTypes            #-}
+{-# LANGUAGE RoleAnnotations       #-}
 {-# LANGUAGE ScopedTypeVariables   #-}
 {-# LANGUAGE TemplateHaskellQuotes #-}
 {-# LANGUAGE TypeApplications      #-}
@@ -50,6 +51,8 @@ import qualified Data.Tree
 -------------------------------------------------------------------------------
 
 newtype CodeT m a = UnsafeCodeT (m Type)
+
+type role CodeT representational nominal
 
 unTypeCodeT :: CodeT m a -> m Type
 unTypeCodeT (UnsafeCodeT ty) = ty
