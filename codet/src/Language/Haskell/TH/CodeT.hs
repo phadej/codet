@@ -5,6 +5,8 @@ module Language.Haskell.TH.CodeT (
     CodeT,
     unTypeCodeT,
     appCodeT,
+    sigCode,
+    sigCodeT,
     CodeTQ,
     -- * LiftT
     LiftT (..),
