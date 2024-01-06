@@ -12,7 +12,21 @@
 {-# LANGUAGE UndecidableInstances  #-}
 #endif
 {-# OPTIONS_HADDOCK not-home #-}
-module Language.Haskell.TH.CodeT.Unsafe where
+module Language.Haskell.TH.CodeT.Unsafe (
+    -- * CodeT
+    CodeT (..),
+    unsafeCodeTCoerce,
+    unTypeCodeT,
+    appCodeT,
+    sigCode,
+    sigCodeT,
+    CodeTQ,
+    unsafeCodeTName,
+    unsafeCodeTNameD,
+    unsafeCodeTNameTC,
+    -- * LiftT
+    LiftT (..),
+) where
 
 import Data.Int     (Int16, Int32, Int64, Int8)
 import Data.Proxy   (Proxy (..))
