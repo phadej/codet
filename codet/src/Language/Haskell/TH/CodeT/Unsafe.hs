@@ -1,15 +1,16 @@
-{-# LANGUAGE CPP                   #-}
-{-# LANGUAGE DataKinds             #-}
-{-# LANGUAGE FlexibleInstances     #-}
-{-# LANGUAGE PolyKinds             #-}
-{-# LANGUAGE RankNTypes            #-}
-{-# LANGUAGE RoleAnnotations       #-}
-{-# LANGUAGE ScopedTypeVariables   #-}
-{-# LANGUAGE TemplateHaskellQuotes #-}
-{-# LANGUAGE TypeApplications      #-}
-{-# LANGUAGE Unsafe                #-}
+{-# LANGUAGE CPP                      #-}
+{-# LANGUAGE DataKinds                #-}
+{-# LANGUAGE FlexibleInstances        #-}
+{-# LANGUAGE PolyKinds                #-}
+{-# LANGUAGE RankNTypes               #-}
+{-# LANGUAGE RoleAnnotations          #-}
+{-# LANGUAGE ScopedTypeVariables      #-}
+{-# LANGUAGE StandaloneKindSignatures #-}
+{-# LANGUAGE TemplateHaskellQuotes    #-}
+{-# LANGUAGE TypeApplications         #-}
+{-# LANGUAGE Unsafe                   #-}
 #if __GLASGOW_HASKELL__ <908
-{-# LANGUAGE UndecidableInstances  #-}
+{-# LANGUAGE UndecidableInstances     #-}
 #endif
 {-# OPTIONS_HADDOCK not-home #-}
 module Language.Haskell.TH.CodeT.Unsafe (
@@ -38,6 +39,7 @@ import GHC.TypeLits (KnownChar, charVal)
 #endif
 
 import qualified GHC.Exts as Ki
+import qualified Data.Kind as Ki
 
 import Language.Haskell.TH
        (Code, Name, Q, Quote, TyLit (..), Type, appT, conT, litT, sigE, sigT, unTypeCode, unsafeCodeCoerce)
@@ -89,6 +91,7 @@ import qualified Data.Tree
 -- >>> unTypeCodeT ty' >>= print . ppr
 -- GHC.Types.Int
 --
+type CodeT :: (Ki.Type -> Ki.Type) -> forall k. k -> Ki.Type
 newtype CodeT q a =
     -- | Unsafely convert an untyped code representation into a typed code representation.
     --
@@ -132,6 +135,7 @@ sigCode e t = unsafeCodeCoerce (sigE (unTypeCode e) (unTypeCodeT t))
 sigCodeT :: Quote q => CodeT q (a :: k) -> CodeT q k -> CodeT q a
 sigCodeT (UnsafeCodeT t) (UnsafeCodeT k) = UnsafeCodeT (k >>= sigT t)
 
+type CodeTQ :: forall k. k -> Ki.Type
 type CodeTQ = CodeT Q
 
 -- | Unsafely convert a (type) name into a typed code representation.
@@ -167,6 +171,7 @@ unsafeCodeTNameTC x y z = unsafeCodeTName (mkNameG_tc x y z)
 -- The [codet-plugin](https://hackage.haskell.org/package/codet-plugin) can automatically
 -- create instances for type constructors. (The provided @f x@ instance does most of the work).
 --
+type LiftT :: forall {k}. k -> Ki.Constraint
 class LiftT a where
     codeT :: Quote m => CodeT m a
 
