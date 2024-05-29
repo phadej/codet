@@ -41,6 +41,7 @@ findPackageDir = do
 
 ghcVer :: Int -> Int
 ghcVer v
+    | v >= 910  = 910 -- 9.10+ has stuff defined in GHC.Internal.*
     | v >= 906  = 906 -- 9.6+ prints GHC.Types.List, not []
     | v >= 902  = 902 -- 9.2+ has Char kind
     | otherwise = 900

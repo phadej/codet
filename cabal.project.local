@@ -1,4 +1,4 @@
-with-compiler: ghc-9.8.1
+with-compiler: ghc-9.10.1
 
 constraints: bytestring installed
 constraints: containeres installed

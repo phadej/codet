@@ -112,7 +112,7 @@ unsafeCodeTCoerce = UnsafeCodeT
 --
 -- >>> let ty = appCodeT (codeT @Maybe) (codeT @Char)
 -- >>> unTypeCodeT ty >>= print . ppr
--- GHC.Maybe.Maybe GHC.Types.Char
+-- GHC...Maybe GHC.Types.Char
 --
 appCodeT :: Quote m => CodeT m f -> CodeT m x -> CodeT m (f x)
 appCodeT (UnsafeCodeT f) (UnsafeCodeT x) = UnsafeCodeT (appT f x)
