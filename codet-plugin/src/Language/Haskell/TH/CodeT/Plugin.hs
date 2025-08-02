@@ -8,6 +8,8 @@ import Control.Monad (forM)
 import Data.Maybe    (catMaybes)
 import Data.String   (fromString)
 
+import Language.Haskell.TH.CodeT ()
+
 import qualified GHC.Plugins as Plugins
 
 import Plugin.GHC
