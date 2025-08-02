@@ -5,9 +5,9 @@ Data.Proxy.Proxy
 GHC.Maybe.Just
 (ConT (Name (OccName "Just") (NameG (DataName) (PkgName "base") (ModName "GHC.Maybe"))))
 Main.Foo
-(ConT (Name (OccName "Foo") (NameG (TcClsName) (PkgName "main") (ModName "Main"))))
+(ConT (Name (OccName "Foo") (NameG (TcClsName) (PkgName "codet-plugin-0.1.0.1-inplace-codet-plugin-tests") (ModName "Main"))))
 Main.Foo
-(ConT (Name (OccName "Foo") (NameG (DataName) (PkgName "main") (ModName "Main"))))
+(ConT (Name (OccName "Foo") (NameG (DataName) (PkgName "codet-plugin-0.1.0.1-inplace-codet-plugin-tests") (ModName "Main"))))
 GHC.Types.List GHC.Types.Int
 (AppT (ConT (Name (OccName "List") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types")))) (ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types")))))
 GHC.Show.Show
