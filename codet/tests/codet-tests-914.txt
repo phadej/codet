@@ -1,0 +1,16 @@
+GHC.Internal.Types.Int
+(ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-internal") (ModName "GHC.Internal.Types"))))
+GHC.Internal.Types.List GHC.Internal.Types.Int
+(AppT (ConT (Name (OccName "List") (NameG (TcClsName) (PkgName "ghc-internal") (ModName "GHC.Internal.Types")))) (ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-internal") (ModName "GHC.Internal.Types")))))
+1
+(LitT (NumTyLit (1)))
+"string"
+(LitT (StrTyLit "string"))
+'c'
+(LitT (CharTyLit ('c')))
+GHC.Internal.Types.Int
+(ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-internal") (ModName "GHC.Internal.Types"))))
+(GHC.Internal.Types.->)
+(ConT (Name (OccName "->") (NameG (TcClsName) (PkgName "ghc-internal") (ModName "GHC.Internal.Types"))))
+GHC.Internal.Prim.TYPE (GHC.Internal.Types.BoxedRep GHC.Internal.Types.Lifted)
+(AppT (ConT (Name (OccName "TYPE") (NameG (TcClsName) (PkgName "ghc-internal") (ModName "GHC.Internal.Prim")))) (AppT (ConT (Name (OccName "BoxedRep") (NameG (DataName) (PkgName "ghc-internal") (ModName "GHC.Internal.Types")))) (ConT (Name (OccName "Lifted") (NameG (DataName) (PkgName "ghc-internal") (ModName "GHC.Internal.Types"))))))

@@ -1,2 +1,3 @@
 branches: master
-docspec:  >=9.6
+-- TODO: change to >=9.14
+docspec:  >=9.6 && <9.14

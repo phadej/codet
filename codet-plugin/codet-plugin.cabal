@@ -1,7 +1,6 @@
 cabal-version:      2.4
 name:               codet-plugin
-version:            0.1.0.1
-x-revision:         1
+version:            0.1.0.2
 license:            BSD-3-Clause
 license-file:       LICENSE
 author:             Oleg Grenrus <oleg.grenrus@iki.fi>
@@ -16,8 +15,9 @@ tested-with:
    || ==9.4.8
    || ==9.6.7
    || ==9.8.4
-   || ==9.10.2
-   || ==9.12.2
+   || ==9.10.3
+   || ==9.12.4
+   || ==9.14.1
 
 synopsis:
   GHC type-checker plugin for solving LiftT instances from codet
@@ -41,9 +41,9 @@ library
   exposed-modules: Language.Haskell.TH.CodeT.Plugin
   other-modules:   Plugin.GHC
   build-depends:
-    , base   ^>=4.15.1.0 || ^>=4.16.3.0 || ^>=4.17.2.1 || ^>=4.18.1.0 || ^>=4.19.0.0 || ^>=4.20.0.0 || ^>=4.21.0.0
+    , base   ^>=4.15.1.0 || ^>=4.16.3.0 || ^>=4.17.2.1 || ^>=4.18.1.0 || ^>=4.19.0.0 || ^>=4.20.0.0 || ^>=4.21.0.0 || ^>=4.22.0.0
     , codet  ^>=0.1
-    , ghc    ^>=9.0.2    || ^>=9.2.3    || ^>=9.4.8    || ^>=9.6.3    || ^>=9.8.1    || ^>=9.10.1   || ^>=9.12.2
+    , ghc    ^>=9.0.2    || ^>=9.2.3    || ^>=9.4.8    || ^>=9.6.3    || ^>=9.8.1    || ^>=9.10.1   || ^>=9.12.2   || ^>=9.14.1
 
 test-suite codet-plugin-tests
   import:         language

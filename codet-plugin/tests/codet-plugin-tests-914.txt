@@ -1,5 +1,5 @@
-GHC.Types.Int
-(ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types"))))
+GHC.Internal.Types.Int
+(ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-internal") (ModName "GHC.Internal.Types"))))
 GHC.Internal.Data.Proxy.Proxy
 (ConT (Name (OccName "Proxy") (NameG (TcClsName) (PkgName "ghc-internal") (ModName "GHC.Internal.Data.Proxy"))))
 GHC.Internal.Maybe.Just
@@ -8,8 +8,8 @@ Main.Foo
 (ConT (Name (OccName "Foo") (NameG (TcClsName) (PkgName "codet-plugin-0.1.0.2-inplace-codet-plugin-tests") (ModName "Main"))))
 Main.Foo
 (ConT (Name (OccName "Foo") (NameG (DataName) (PkgName "codet-plugin-0.1.0.2-inplace-codet-plugin-tests") (ModName "Main"))))
-GHC.Types.List GHC.Types.Int
-(AppT (ConT (Name (OccName "List") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types")))) (ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types")))))
+GHC.Internal.Types.List GHC.Internal.Types.Int
+(AppT (ConT (Name (OccName "List") (NameG (TcClsName) (PkgName "ghc-internal") (ModName "GHC.Internal.Types")))) (ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-internal") (ModName "GHC.Internal.Types")))))
 GHC.Internal.Show.Show
 (ConT (Name (OccName "Show") (NameG (TcClsName) (PkgName "ghc-internal") (ModName "GHC.Internal.Show"))))
 1
@@ -18,5 +18,5 @@ GHC.Internal.Show.Show
 (LitT (StrTyLit "string"))
 'c'
 (LitT (CharTyLit ('c')))
-GHC.Types.Int
-(ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-prim") (ModName "GHC.Types"))))
+GHC.Internal.Types.Int
+(ConT (Name (OccName "Int") (NameG (TcClsName) (PkgName "ghc-internal") (ModName "GHC.Internal.Types"))))
